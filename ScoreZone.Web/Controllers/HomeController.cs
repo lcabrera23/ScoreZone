@@ -20,18 +20,20 @@ namespace ScoreZone.Web.Controllers
         }
         public async Task<IActionResult> Index()
         {
-           var mbl = await _apiServices.getFirtsNews("http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/news");
-            var Football = await _apiServices.getFirtsNews("http://site.api.espn.com/apis/site/v2/sports/football/college-football/news");
-            var NFL = await _apiServices.getFirtsNews("http://site.api.espn.com/apis/site/v2/sports/football/nfl/news");
+           var mbl =  _apiServices.getFirtsNews("http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/news");
+            var Football =  _apiServices.getFirtsNews("http://site.api.espn.com/apis/site/v2/sports/football/college-football/news");
+            var NFL =  _apiServices.getFirtsNews("http://site.api.espn.com/apis/site/v2/sports/football/nfl/news");
             //var Hockey = await _apiServices.getFirtsNews("http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/news");
-            var NBA = await _apiServices.getFirtsNews("http://site.api.espn.com/apis/site/v2/sports/basketball/nba/news");
+            var NBA =  _apiServices.getFirtsNews("http://site.api.espn.com/apis/site/v2/sports/basketball/nba/news");
             //var Soccer = await _apiServices.getFirtsNews("http://site.api.espn.com/apis/site/v2/sports/soccer/:league/news");
             var resultados = new List<Root>();
 
-            resultados.Add(mbl);
-            resultados.Add(Football);
-            resultados.Add(NFL);
-            resultados.Add(NBA);
+            await Task.WhenAll(mbl, Football, NFL, NBA);
+            
+            resultados.Add(await mbl);
+            resultados.Add(await Football);
+            resultados.Add(await NFL);
+            resultados.Add(await NBA);
 
             return View(resultados);
         }
