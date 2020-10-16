@@ -51,6 +51,7 @@ namespace ScoreZone.Web
             });
             services.AddTransient<SeeDB>();
             services.AddScoped<IUserHelper, UserHelper>();
+            services.AddScoped<IApiServices, ApiServices>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

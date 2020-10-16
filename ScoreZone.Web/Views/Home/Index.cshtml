@@ -1,94 +1,147 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<ScoreZone.Web.Data.NoticiasEntities.Root>
+@{
+    ViewData["Title"] = "ScoreZone";
 }
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
+
+<div class="container mt-5">
+    @foreach (var item in Model)
+    {
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <section class="col-one">
+                    <article class="sub-module quicklinks">
+                        <div class="quicklinks__container">
+                            <header class="quicklinks__header">
+                            <h2 class="quicklinks__heading d-flex justify-content-center">Quick Links</h2>
+                                </header>
+                            <ul class="quicklinks_list d-flex flex-column justify-content-center align-content-center" >
+                                <li class="quicklinks_list__item">
+                                    <a name="&amp;lpos=fp:quicklinks:1:mlbplayoffs" href="#" class="quicklinks_list__link ">
+                                        <div class="quicklinks_list__icon"><img src="https://a4.espncdn.com/combiner/i?img=%2Fi%2Fespn%2Fmisc_logos%2F500%2Fmlb.png&amp;w=60&amp;h=60&amp;scale=crop&amp;cquality=80&amp;location=origin" alt="" class="lazyloaded"></div>
+                                        <div class="quicklinks_list__detail">
+                                            <span class="quicklinks_list__name">MLB Playoffs</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="quicklinks_list__item">
+                                    <a name="&amp;lpos=fp:quicklinks:2:nhlfreeagency" href="#" class="quicklinks_list__link ">
+                                        <div class="quicklinks_list__icon"><img src="https://a1.espncdn.com/combiner/i?img=%2Fi%2Fespn%2Fmisc_logos%2F500%2Fnhl.png&amp;w=60&amp;h=60&amp;scale=crop&amp;cquality=80&amp;location=origin" alt="" class="lazyloaded"></div>
+                                        <div class="quicklinks_list__detail">
+                                            <span class="quicklinks_list__name">NHL Free Agency</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="quicklinks_list__item">
+                                    <a name="&amp;lpos=fp:quicklinks:3:mondaynightpickem" href="#" class="quicklinks_list__link ">
+                                        <div class="quicklinks_list__icon"><img src="https://a2.espncdn.com/combiner/i?img=%2Fi%2Ffantasy%2Fffl.png&amp;w=60&amp;h=60&amp;scale=crop&amp;cquality=80&amp;location=origin" alt="" class="lazyloaded"></div>
+                                        <div class="quicklinks_list__detail">
+                                            <span class="quicklinks_list__name">Monday Night Pick'em</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="quicklinks_list__item">
+                                    <a name="&amp;lpos=fp:quicklinks:4:ufcfightnightpickem" href="#" class="quicklinks_list__link ">
+                                        <div class="quicklinks_list__icon"><img src="https://a1.espncdn.com/combiner/i?img=%2Fredesign%2Fassets%2Fimg%2Ficons%2FESPN%2Dicon%2Dmma.png&amp;w=80&amp;h=80&amp;scale=crop&amp;cquality=40&amp;location=origin" alt="" class="lazyloaded"></div>
+                                        <div class="quicklinks_list__detail">
+                                            <span class="quicklinks_list__name">UFC Fight Night Pick'em</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="quicklinks_list__item">
+                                    <a name="&amp;lpos=fp:quicklinks:5:playoffbaseballclassic" href="#" class="quicklinks_list__link ">
+                                        <div class="quicklinks_list__icon"><img src="https://a3.espncdn.com/combiner/i?img=%2Fredesign%2Fassets%2Fimg%2Ficons%2FESPN%2Dicon%2Dbaseball.png&amp;w=80&amp;h=80&amp;scale=crop&amp;cquality=40&amp;location=origin" alt="" class="lazyloaded"></div>
+                                        <div class="quicklinks_list__detail">
+                                            <span class="quicklinks_list__name">Playoff Baseball Classic</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                </section>
             </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
+            <div class="col-md-8">
+                <a class="card" href="@Url.Action("ResultNews","Home",new {resul =item.articles[0].links.api.news.href })">
+                    <img src="@item.articles[0].images[0].url" class="card-img-top" alt="...">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@item.articles[1].images.LastOrDefault().name</h5>
+                        <p class="card-text">@item.articles[1].images.LastOrDefault().caption</p>
+
+                    </div>
+                </a>
             </div>
+
         </div>
-        <div class="item">
-            <img src="~/images/banner3.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
+    }
+    @*<div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-8">
+            <a class="card" href="@Url.Action("ResultNews","Home",new {resul =Model.articles[0].links.api.news.href })">
+                <img src="@Model.articles[0].images[0].url" class="card-img-top" alt="...">
+
+                <div class="card-body">
+                    <h5 class="card-title">@Model.articles[1].images.LastOrDefault().name</h5>
+                    <p class="card-text">@Model.articles[1].images.LastOrDefault().caption</p>
+
+                </div>
+            </a>
+        </div>
+
+    </div>*@
+    @*<div class="row mt-4">
+            <div class="col-md-3">
             </div>
+            <div class="col-md-8">
+                <a class="card" href="@Url.Action("ResultNews","Home",new {resul =ViewBag.Football.articles[0].links.api.news.href })">
+                    <img src="@ViewBag.Football.articles[0].images[0].url" class="card-img-top" alt="...">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@ViewBag.Football.articles[0].images[0].name</h5>
+                        <p class="card-text">@ViewBag.Football.articles[0].images[0].caption</p>
+
+                    </div>
+                </a>
+            </div>
+
         </div>
-    </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+
+        <div class="row mt-4">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-8">
+                <a class="card" href="@Url.Action("ResultNews","Home",new {resul =ViewBag.NFL.articles[0].links.api.news.href })">
+                    <img src="@ViewBag.NFL.articles[0].images[0].url" class="card-img-top" alt="...">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@ViewBag.NFL.articles[0].images[0].name</h5>
+                        <p class="card-text">@ViewBag.NFL.articles[0].images[0].caption</p>
+
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-8">
+                <a class="card" href="@Url.Action("ResultNews","Home",new {resul =ViewBag.NBA.articles[0].links.api.news.href })">
+                    <img src="@ViewBag.NBA.articles[0].images[0].url" class="card-img-top" alt="...">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@ViewBag.NBA.articles[0].images[0].name</h5>
+                        <p class="card-text">@ViewBag.NBA.articles[0].images[0].caption</p>
+
+                    </div>
+                </a>
+            </div>
+
+        </div>*@
 </div>
 
-<div class="row">
-    <div class="col-md-3">
-        <h2>Application uses</h2>
-        <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run &amp; Deploy</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
-    </div>
-</div>
+
+
