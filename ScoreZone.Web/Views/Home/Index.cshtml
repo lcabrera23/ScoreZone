@@ -5,9 +5,12 @@
 
 
 <div class="container mt-5">
+    @{var index =0;}
     @foreach (var item in Model)
     {
         <div class="row mt-4">
+           @if(index ==0){
+            index++;
             <div class="col-md-3">
                 <section class="col-one">
                     <article class="sub-module quicklinks">
@@ -61,6 +64,9 @@
                     </article>
                 </section>
             </div>
+         }else{
+            <div class="col-md-3"></div>
+            }
             <div class="col-md-8">
                 <a class="card" href="@Url.Action("ResultNews","Home",new {resul =item.articles[0].links.api.news.href })">
                     <img src="@item.articles[0].images[0].url" class="card-img-top" alt="...">
@@ -74,73 +80,9 @@
             </div>
 
         </div>
+        
     }
-    @*<div class="row">
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-8">
-            <a class="card" href="@Url.Action("ResultNews","Home",new {resul =Model.articles[0].links.api.news.href })">
-                <img src="@Model.articles[0].images[0].url" class="card-img-top" alt="...">
 
-                <div class="card-body">
-                    <h5 class="card-title">@Model.articles[1].images.LastOrDefault().name</h5>
-                    <p class="card-text">@Model.articles[1].images.LastOrDefault().caption</p>
-
-                </div>
-            </a>
-        </div>
-
-    </div>*@
-    @*<div class="row mt-4">
-            <div class="col-md-3">
-            </div>
-            <div class="col-md-8">
-                <a class="card" href="@Url.Action("ResultNews","Home",new {resul =ViewBag.Football.articles[0].links.api.news.href })">
-                    <img src="@ViewBag.Football.articles[0].images[0].url" class="card-img-top" alt="...">
-
-                    <div class="card-body">
-                        <h5 class="card-title">@ViewBag.Football.articles[0].images[0].name</h5>
-                        <p class="card-text">@ViewBag.Football.articles[0].images[0].caption</p>
-
-                    </div>
-                </a>
-            </div>
-
-        </div>
-
-        <div class="row mt-4">
-            <div class="col-md-3">
-            </div>
-            <div class="col-md-8">
-                <a class="card" href="@Url.Action("ResultNews","Home",new {resul =ViewBag.NFL.articles[0].links.api.news.href })">
-                    <img src="@ViewBag.NFL.articles[0].images[0].url" class="card-img-top" alt="...">
-
-                    <div class="card-body">
-                        <h5 class="card-title">@ViewBag.NFL.articles[0].images[0].name</h5>
-                        <p class="card-text">@ViewBag.NFL.articles[0].images[0].caption</p>
-
-                    </div>
-                </a>
-            </div>
-
-        </div>
-
-        <div class="row mt-4">
-            <div class="col-md-3">
-            </div>
-            <div class="col-md-8">
-                <a class="card" href="@Url.Action("ResultNews","Home",new {resul =ViewBag.NBA.articles[0].links.api.news.href })">
-                    <img src="@ViewBag.NBA.articles[0].images[0].url" class="card-img-top" alt="...">
-
-                    <div class="card-body">
-                        <h5 class="card-title">@ViewBag.NBA.articles[0].images[0].name</h5>
-                        <p class="card-text">@ViewBag.NBA.articles[0].images[0].caption</p>
-
-                    </div>
-                </a>
-            </div>
-
-        </div>*@
 </div>
 
 

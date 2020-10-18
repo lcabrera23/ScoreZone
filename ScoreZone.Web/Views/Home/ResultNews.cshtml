@@ -3,6 +3,7 @@
     ViewData["Title"] = "ResultNews";
 }
 
+
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-3">
@@ -10,50 +11,91 @@
         <div class="col-md-8">
             @if (Model.headlines != null && Model.headlines[0].video.Count > 0)
             {
-            <div class="card">
-                @if (Model.headlines[0].video[0].links.source != null)
-                {
-                    <video src="@Model.headlines[0].video[0].links.source.HD.href" width="640" height="480" controls>
-                    </video>
-                }
-                else
-                {
-                    <img src="https://www.yodot.com/images/broken-avi-file-repai.png" width="640" height="480" />
+                <div class="card">
+                    @if (Model.headlines[0].video[0].links.source != null)
+                    {
+                        <video src="@Model.headlines[0].video[0].links.source.HD.href"  height="480" controls>
+                        </video>
+                    }
+                    else
+                    {
+                        <img src="https://www.yodot.com/images/broken-avi-file-repai.png"  height="480" />
 
-                }
-
-
-                <div class="card-body">
-                    <h5 class="card-title">
-                        @if (Model.headlines[0].related != null && Model.headlines[0].related.Count > 0)
-                        {
-                            @Model.headlines[0].related[0].title
-                        }
-                    </h5>
-                    <p class="card-text">@Model.headlines[0].description</p>
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @if (Model.headlines[0].related != null && Model.headlines[0].related.Count > 0)
+                            {
+                                @Model.headlines[0].related[0].title
+                            }
+                        </h5>
+                        <p class="card-text">@Model.headlines[0].description</p>
 
 
+                    </div>
                 </div>
-            </div>
             }
-            else if(Model.headlines != null)
+            else if (Model.headlines != null)
             {
-        <div class="card">
-            <img src="https://www.yodot.com/images/broken-avi-file-repai.png" class="card-img-top" alt="..." width="640" height="480">
-            <div class="card-body">
+                <div class="card">
+                    <img src="@Model.headlines[0].images[0].url" class="card-img-top" alt="..."  height="480">
+                    <div class="card-body">
 
-                <h5 class="card-title">@Model.headlines[0].related[0].title</h5>
-                <p class="card-text">@Model.headlines[0].description</p>
+                        <h5 class="card-title">@Model.headlines[0].title</h5>
+                        <p class="card-text">@Model.headlines[0].description</p>
 
-            </div>
-        </div>
+                    </div>
+                </div>
             }
             else
             {
                 <p>La noticia ya no esta disponible para ver el video</p>
             }
+
+            @if (Model.headlines !=null) {
+                @foreach (var item in Model.headlines[0].related)
+                {
+                    <div class="card mt-4">
+                   
+                        @if (!string.IsNullOrEmpty(item.links.api.news.href))
+                        {
+                            <video src="@item.links.api.news.href" onerror="buscaVideo(this)"  height="480" controls>
+                            </video>
+                        }
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">@item.headline</h5>
+                            <p class="card-text">@item.description</p>
+                        </div>
+                    </div>
+                  }
+            }
         </div>
     </div>
 
 </div>
+@section Scripts {
+    <script>
+        //funcion para cambiar el src del video
+        async function buscaVideo(elemeto) {
+         
+            let url = elemeto.src.replace('http', 'https');
+            const response = await fetch(url);
+            const result = await response.json();
 
+            if (result !==null) {
+                 if (result.headlines.length > 0) {
+                     if (result.headlines[0].video.length > 0) {
+                         elemeto.src = result.headlines[0].video[0].links.source.HD.href;
+                     }
+
+
+                 }
+            }
+
+        }
+
+    </script>
+
+  }

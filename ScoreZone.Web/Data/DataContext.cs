@@ -16,5 +16,7 @@ namespace ScoreZone.Web.Data
         }
 
         public DbSet<Manager> Managers { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
     }
 }
